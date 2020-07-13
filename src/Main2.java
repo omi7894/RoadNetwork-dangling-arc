@@ -51,10 +51,9 @@ public class Main2 {
 			PolylineShape p = (PolylineShape) s;
 			TotalPart += p.getNumberOfParts();
         	TotalPoint += p.getNumberOfPoints();
-
 			numOfShape++;
 		}
-
+		
 
 
 		FileInputStream IS = new FileInputStream(
@@ -72,45 +71,57 @@ public class Main2 {
 		Node[] node = new Node[TotalPart+1];
 		Part[] part = new Part[TotalPart];
 		Shape[] shape = new Shape[numOfShape];
+		
+		PointList[] pointlist = new PointList[TotalPart];
+		PartList[] partlist = new PartList[numOfShape];
+		ShapeList shapelist = new ShapeList();
 
-		System.out.println(S.getShapeType() + " ");
 
 		int ShapeID = 0;
 		int PartID=0;
 		int PointID=0;
-		
-		
-		
+		int NodeID=0;
+
 		while ((S = R.next()) != null) {
 			
-			//shape[ShapeID].setId(ShapeID);
-			shape[ShapeID] = new Shape(ShapeID);
 			PolylineShape PL = (PolylineShape) S;
 			
-			int numOfpart = PL.getNumberOfParts();
+			
+			shape[ShapeID] = new Shape(ShapeID);
+			partlist[ShapeID] = new PartList();
 
 			for (int i = 0; i<PL.getNumberOfParts(); i++) {
-			//part[PartID].setId(PartID);
+			
 			part[PartID] = new Part(PartID);	
+			pointlist[PartID] = new PointList();
 				for(int j=0; j<PL.getPointsOfPart(i).length;j++) {
-					point[PointID] = new Point(PL.getPointsOfPart(i)[j].getX(), PL.getPointsOfPart(i)[j].getY() );
+					
+					//if(j==0 || j==PL.getPointsOfPart(i).length-1) {
+					//	node[NodeID] = new Node(NodeID, PL.getPointsOfPart(i)[j].getX(), PL.getPointsOfPart(i)[j].getY());
+					//	NodeID++;
+					//}
+					point[PointID] = new Point(PL.getPointsOfPart(i)[j].getX(), PL.getPointsOfPart(i)[j].getY() );					
+					pointlist[PartID].addLast(point[PointID].getX(), point[PointID].getY());					
 					PointID++;
+
 				
 				}
 				
+				partlist[ShapeID].addLast(PartID);				
 				PartID++;
+				
+			
 			}
-
+			shapelist.addLast(ShapeID);
 			ShapeID++;
+			
+			
+
 		}
 
 		is.close();
 
 		
-		
-		for(int i=0;i<TotalPoint;i++) {
-			System.out.println(point[i].getX()+" "+point[i].getY());
-		}
 	}
 	
 	
