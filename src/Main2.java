@@ -50,14 +50,11 @@ public class Main2 {
 
 			PolylineShape p = (PolylineShape) s;
 			TotalPart += p.getNumberOfParts();
-        	TotalPoint += p.getNumberOfPoints();
+			TotalPoint += p.getNumberOfPoints();
 			numOfShape++;
 		}
-		
 
-
-		FileInputStream IS = new FileInputStream(
-				"C:\\Users\\ETRI\\Documents\\test.shp");
+		FileInputStream IS = new FileInputStream("C:\\Users\\ETRI\\Documents\\test.shp");
 
 		ValidationPreferences PREFS = new ValidationPreferences();
 
@@ -68,62 +65,80 @@ public class Main2 {
 		S = R.next();
 
 		Point[] point = new Point[TotalPoint];
-		Node[] node = new Node[TotalPart+1];
+		Node[] node = new Node[TotalPoint];
 		Part[] part = new Part[TotalPart];
 		Shape[] shape = new Shape[numOfShape];
-		
+
 		PointList[] pointlist = new PointList[TotalPart];
 		PartList[] partlist = new PartList[numOfShape];
 		ShapeList shapelist = new ShapeList();
 
-
 		int ShapeID = 0;
-		int PartID=0;
-		int PointID=0;
-		int NodeID=0;
+		int PartID = 0;
+		int PointID = 0;
+		int NodeID = 0;
 
 		while ((S = R.next()) != null) {
-			
+
 			PolylineShape PL = (PolylineShape) S;
-			
-			
+
 			shape[ShapeID] = new Shape(ShapeID);
 			partlist[ShapeID] = new PartList();
 
-			for (int i = 0; i<PL.getNumberOfParts(); i++) {
-			
-			part[PartID] = new Part(PartID);	
-			pointlist[PartID] = new PointList();
-				for(int j=0; j<PL.getPointsOfPart(i).length;j++) {
-					
-					//if(j==0 || j==PL.getPointsOfPart(i).length-1) {
-					//	node[NodeID] = new Node(NodeID, PL.getPointsOfPart(i)[j].getX(), PL.getPointsOfPart(i)[j].getY());
-					//	NodeID++;
-					//}
-					point[PointID] = new Point(PL.getPointsOfPart(i)[j].getX(), PL.getPointsOfPart(i)[j].getY() );					
-					pointlist[PartID].addLast(point[PointID].getX(), point[PointID].getY());					
+			for (int i = 0; i < PL.getNumberOfParts(); i++) {
+
+				part[PartID] = new Part(PartID);
+				part[PartID].setShpaeID(ShapeID);
+				pointlist[PartID] = new PointList();
+				for (int j = 0; j < PL.getPointsOfPart(i).length; j++) {
+
+					point[PointID] = new Point(PL.getPointsOfPart(i)[j].getX(), PL.getPointsOfPart(i)[j].getY());
+					pointlist[PartID].addLast(point[PointID].getX(), point[PointID].getY());
+					if (j == 0) {
+						node[NodeID] = new Node(NodeID, PL.getPointsOfPart(i)[j].getX(),
+								PL.getPointsOfPart(i)[j].getY());
+						node[NodeID].setPartID(PartID);
+						node[NodeID].setShpaeID(ShapeID);
+						part[PartID].setStart(node[NodeID]);
+						if (i == 0) {
+							shape[ShapeID].setStart(node[NodeID]);
+						}
+						NodeID++;
+					}
+					if (j == PL.getPointsOfPart(i).length - 1) {
+						node[NodeID] = new Node(NodeID, PL.getPointsOfPart(i)[j].getX(),
+								PL.getPointsOfPart(i)[j].getY());
+						node[NodeID].setPartID(PartID);
+						node[NodeID].setShpaeID(ShapeID);
+						part[PartID].setEnd(node[NodeID]);
+						if (i == PL.getNumberOfParts() - 1) {
+							shape[ShapeID].setEnd(node[NodeID]);
+						}
+						NodeID++;
+					}
+
 					PointID++;
 
-				
 				}
-				
-				partlist[ShapeID].addLast(PartID);				
+				part[PartID].setList(pointlist[PartID]); // point list 추가
+
+				partlist[ShapeID].addLast(PartID);
 				PartID++;
-				
-			
+
 			}
+			shape[ShapeID].setList(partlist[ShapeID]);
+
 			shapelist.addLast(ShapeID);
 			ShapeID++;
-			
-			
 
+		}
+
+		for (int i = 0; i < numOfShape; i++) {
+			System.out.println("아이디 : "+ shape[i].getId()+ "  " +shape[i].getStart().getX()+ " , "+shape[i].getEnd().getX());
 		}
 
 		is.close();
 
-		
 	}
-	
-	
 
 }
