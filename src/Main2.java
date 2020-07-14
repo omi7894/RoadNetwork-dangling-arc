@@ -98,7 +98,7 @@ public class Main2 {
 				for (int j = 0; j < PL.getPointsOfPart(i).length; j++) {
 
 					point[PointID] = new Point(PL.getPointsOfPart(i)[j].getX(), PL.getPointsOfPart(i)[j].getY());
-					pointlist[PartID].addLast(point[PointID].getX(), point[PointID].getY());
+					pointlist[PartID].addLast(point[PointID]);
 
 					if (PL.getPointsOfPart(i)[j].getX() < minX) {
 						minX = PL.getPointsOfPart(i)[j].getX();
@@ -141,7 +141,7 @@ public class Main2 {
 				}
 				part[PartID].setList(pointlist[PartID]); // point list 추가
 
-				partlist[ShapeID].addLast(PartID);
+				partlist[ShapeID].addLast(part[PartID]);
 				PartID++;
 
 			}
@@ -150,15 +150,76 @@ public class Main2 {
 			BBox box = new BBox(minX, minY, maxX, maxY);
 			shape[ShapeID].setBox(box);
 
-			shapelist.addLast(ShapeID);
+			shapelist.addLast(shape[ShapeID]);
 			ShapeID++;
 
 		}
 
-		//명령
+		// 명령		
+		shapelist.AddDgree();
 
-		is.close();
+		for(int i=0;i<shapelist.size();i++) {
+			System.out.println(shapelist.getShape(i).getId()+" : "+shapelist.getShape(i).getDsn()+" , "+shapelist.getShape(i).getDen() );
 
+		}
+	
 	}
 
+	public double getDistance(double x, double y, double x1, double y1) {
+
+		return Math.sqrt(Math.pow(Math.abs(x1 - x), 2) + Math.pow(Math.abs(y1 - y), 2));
+
+	}
+	/*
+	public void AddDgree(ShapeList shapelist) {
+		
+		ShapeList newlist = new ShapeList();
+		newlist = shapelist;
+		
+		Node SN1 = new Node();
+		Node EN1 = new Node();
+		Node SN2 = new Node();
+		Node EN2 = new Node();
+
+		for (int i = 0; i < newlist.size(); i++) {
+			for (int j = i; j < newlist.size(); i++) {
+				SN1 = newlist.getShape(i).getStart();
+				EN1 = newlist.getShape(i).getEnd();
+				SN2 = newlist.getShape(j).getStart();
+				EN2 = newlist.getShape(j).getEnd();
+
+				double dt = 0;
+
+				double cal1 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
+				double cal2 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
+				double cal3 = getDistance(SN2.getX(), SN2.getY(), EN1.getX(), EN1.getY());
+				double cal4 = getDistance(SN2.getX(), SN2.getY(), EN2.getX(), EN2.getY());
+
+				int con =0;
+				if(cal1==dt) {con++;}
+				if(cal2==dt) {con++;}
+				if(cal3==dt) {con++;}
+				if(cal4==dt) {con++;}
+				
+				if(con==1) {
+					if(cal1==dt) {
+						newlist.getShape(i).setDsn(newlist.getShape(i).getDsn()+1);
+						newlist.getShape(j).setDsn(newlist.getShape(j).getDsn()+1);
+					}else if(cal2==dt) {
+						newlist.getShape(i).setDsn(newlist.getShape(i).getDsn()+1);
+						newlist.getShape(j).setDsn(newlist.getShape(j).getDen()+1);
+					}else if(cal3==dt) {
+						newlist.getShape(i).setDsn(newlist.getShape(i).getDen()+1);
+						newlist.getShape(j).setDsn(newlist.getShape(j).getDsn()+1);
+					}else {
+						newlist.getShape(i).setDsn(newlist.getShape(i).getDen()+1);
+						newlist.getShape(j).setDsn(newlist.getShape(j).getDen()+1);
+					}
+										
+				}
+
+			}
+		}
+		
+	}*/
 }
