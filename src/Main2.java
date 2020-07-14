@@ -82,6 +82,11 @@ public class Main2 {
 
 			PolylineShape PL = (PolylineShape) S;
 
+			double minX = PL.getPoints()[0].getX();
+			double minY = PL.getPoints()[0].getY();
+			double maxX = PL.getPoints()[0].getX();
+			double maxY = PL.getPoints()[0].getY();
+
 			shape[ShapeID] = new Shape(ShapeID);
 			partlist[ShapeID] = new PartList();
 
@@ -94,6 +99,20 @@ public class Main2 {
 
 					point[PointID] = new Point(PL.getPointsOfPart(i)[j].getX(), PL.getPointsOfPart(i)[j].getY());
 					pointlist[PartID].addLast(point[PointID].getX(), point[PointID].getY());
+
+					if (PL.getPointsOfPart(i)[j].getX() < minX) {
+						minX = PL.getPointsOfPart(i)[j].getX();
+					}
+					if (PL.getPointsOfPart(i)[j].getY() < minY) {
+						minY = PL.getPointsOfPart(i)[j].getY();
+					}
+					if (PL.getPointsOfPart(i)[j].getX() > maxX) {
+						maxX = PL.getPointsOfPart(i)[j].getX();
+					}
+					if (PL.getPointsOfPart(i)[j].getY() > maxY) {
+						maxY = PL.getPointsOfPart(i)[j].getY();
+					}
+
 					if (j == 0) {
 						node[NodeID] = new Node(NodeID, PL.getPointsOfPart(i)[j].getX(),
 								PL.getPointsOfPart(i)[j].getY());
@@ -128,14 +147,15 @@ public class Main2 {
 			}
 			shape[ShapeID].setList(partlist[ShapeID]);
 
+			BBox box = new BBox(minX, minY, maxX, maxY);
+			shape[ShapeID].setBox(box);
+
 			shapelist.addLast(ShapeID);
 			ShapeID++;
 
 		}
 
-		for (int i = 0; i < numOfShape; i++) {
-			System.out.println("아이디 : "+ shape[i].getId()+ "  " +shape[i].getStart().getX()+ " , "+shape[i].getEnd().getX());
-		}
+		//명령
 
 		is.close();
 
