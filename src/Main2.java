@@ -25,7 +25,7 @@ import java.sql.PreparedStatement;
 public class Main2 {
 
 	public static void main(String[] args) throws Exception {
-
+		
 		FileInputStream is = new FileInputStream("C:\\Users\\ETRI\\Documents\\test.shp");
 
 		ValidationPreferences prefs = new ValidationPreferences();
@@ -150,76 +150,91 @@ public class Main2 {
 			BBox box = new BBox(minX, minY, maxX, maxY);
 			shape[ShapeID].setBox(box);
 
-			shapelist.addLast(shape[ShapeID]);
+			shapelist.addSorting(shape[ShapeID]);
 			ShapeID++;
 
 		}
 
 		// 명령		
-		shapelist.AddDgree();
-
+		long start = System.currentTimeMillis();
+		shapelist.AddDegree();
+		long end = System.currentTimeMillis();
 		for(int i=0;i<shapelist.size();i++) {
-			System.out.println(shapelist.getShape(i).getId()+" : "+shapelist.getShape(i).getDsn()+" , "+shapelist.getShape(i).getDen() );
-
+			System.out.println(shapelist.getShape(i).getDsn()+" , "+shapelist.getShape(i).getDen());
 		}
-	
-	}
-
-	public double getDistance(double x, double y, double x1, double y1) {
-
-		return Math.sqrt(Math.pow(Math.abs(x1 - x), 2) + Math.pow(Math.abs(y1 - y), 2));
-
-	}
-	/*
-	public void AddDgree(ShapeList shapelist) {
+		System.out.println("시간 : "+(end-start)/1000.0);
+		
+		
+		/*
+		//quick정렬
+		Shape[] arr=new Shape[shapelist.size()];
+		for(int i=0; i<shapelist.size();i++) {
+			arr[i] = shapelist.getShape(i);
+		}
+		
+		quick_sort(arr, 0, shapelist.size()-1);
+		
 		
 		ShapeList newlist = new ShapeList();
-		newlist = shapelist;
-		
-		Node SN1 = new Node();
-		Node EN1 = new Node();
-		Node SN2 = new Node();
-		Node EN2 = new Node();
-
-		for (int i = 0; i < newlist.size(); i++) {
-			for (int j = i; j < newlist.size(); i++) {
-				SN1 = newlist.getShape(i).getStart();
-				EN1 = newlist.getShape(i).getEnd();
-				SN2 = newlist.getShape(j).getStart();
-				EN2 = newlist.getShape(j).getEnd();
-
-				double dt = 0;
-
-				double cal1 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
-				double cal2 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
-				double cal3 = getDistance(SN2.getX(), SN2.getY(), EN1.getX(), EN1.getY());
-				double cal4 = getDistance(SN2.getX(), SN2.getY(), EN2.getX(), EN2.getY());
-
-				int con =0;
-				if(cal1==dt) {con++;}
-				if(cal2==dt) {con++;}
-				if(cal3==dt) {con++;}
-				if(cal4==dt) {con++;}
-				
-				if(con==1) {
-					if(cal1==dt) {
-						newlist.getShape(i).setDsn(newlist.getShape(i).getDsn()+1);
-						newlist.getShape(j).setDsn(newlist.getShape(j).getDsn()+1);
-					}else if(cal2==dt) {
-						newlist.getShape(i).setDsn(newlist.getShape(i).getDsn()+1);
-						newlist.getShape(j).setDsn(newlist.getShape(j).getDen()+1);
-					}else if(cal3==dt) {
-						newlist.getShape(i).setDsn(newlist.getShape(i).getDen()+1);
-						newlist.getShape(j).setDsn(newlist.getShape(j).getDsn()+1);
-					}else {
-						newlist.getShape(i).setDsn(newlist.getShape(i).getDen()+1);
-						newlist.getShape(j).setDsn(newlist.getShape(j).getDen()+1);
-					}
-										
-				}
-
-			}
+		for(int i=0;i<shapelist.size();i++) {
+			newlist.addLast(arr[i]);
 		}
+	
 		
-	}*/
+		for(int i=0; i<newlist.size();i++) {
+			System.out.println(newlist.getShape(i).getBox().getMinX()+"\n");
+		}*/
+	}
+
+	 static int partition(Shape list[], int left, int right) {
+		
+		  Shape pivot = new Shape();
+		  Shape temp = new Shape();
+		  int low, high;
+
+		  low = left;
+		  high = right + 1;
+		  pivot = list[left]; // 정렬할 리스트의 가장 왼쪽 데이터를 피벗으로 선택(임의의 값을 피벗으로 선택)
+
+		  /* low와 high가 교차할 때까지 반복(low<high) */
+		  do{
+		    /* list[low]가 피벗보다 작으면 계속 low를 증가 */
+		    do {
+		      low++; // low는 left+1 에서 시작
+		    } while (low<=right && list[low].getBox().getMinX()<pivot.getBox().getMinX());
+
+		    /* list[high]가 피벗보다 크면 계속 high를 감소 */
+		    do {
+		      high--; //high는 right 에서 시작
+		    } while (high>=left && list[high].getBox().getMinX()>pivot.getBox().getMinX());
+
+		    // 만약 low와 high가 교차하지 않았으면 list[low]를 list[high] 교환
+		    if(low<high){
+		    	temp = list[low];
+		    	list[low]=list[high];
+		    	list[high]=temp;
+		    }
+		  } while (low<high);
+
+		  temp=list[left];
+		  list[left]=list[high];
+		  list[high]=temp;
+
+		  return high;
+		}
+
+		static // 퀵 정렬
+		void quick_sort(Shape list[],int left, int right){
+	
+		  /* 정렬할 범위가 2개 이상의 데이터이면(리스트의 크기가 0이나 1이 아니면) */
+		  if(left<right){
+		    // partition 함수를 호출하여 피벗을 기준으로 리스트를 비균등 분할 -분할(Divide)
+		    int q = partition(list, left, right); // q: 피벗의 위치
+
+		    // 피벗은 제외한 2개의 부분 리스트를 대상으로 순환 호출
+		    quick_sort(list, left, q-1); // (left ~ 피벗 바로 앞) 앞쪽 부분 리스트 정렬 -정복(Conquer)
+		    quick_sort(list, q+1,right); // (피벗 바로 뒤 ~ right) 뒤쪽 부분 리스트 정렬 -정복(Conquer)
+		  }
+
+		}
 }
