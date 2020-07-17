@@ -155,6 +155,19 @@ public class Main2 {
 
 		}
 
+		//QuadTree만들기...
+		TreeNode[] treenode = new TreeNode[21];
+		treenode[0]=new TreeNode();
+		treenode[1]=new TreeNode();
+		treenode[2]=new TreeNode();
+		treenode[3]=new TreeNode();
+		treenode[4]=new TreeNode();
+		treenode[0].setBox(shapelist.getLargestBox());
+		
+		QuadTree quadtree = new QuadTree(treenode[0]);
+
+	
+		
 		// 명령		
 		long start = System.currentTimeMillis();
 		shapelist.AddDegree();
@@ -163,7 +176,7 @@ public class Main2 {
 			System.out.println(shapelist.getShape(i).getDsn()+" , "+shapelist.getShape(i).getDen());
 		}
 		System.out.println("시간 : "+(end-start)/1000.0);
-		
+				
 		
 		/*
 		//quick정렬
@@ -194,21 +207,17 @@ public class Main2 {
 
 		  low = left;
 		  high = right + 1;
-		  pivot = list[left]; // 정렬할 리스트의 가장 왼쪽 데이터를 피벗으로 선택(임의의 값을 피벗으로 선택)
+		  pivot = list[left]; 
 
-		  /* low와 high가 교차할 때까지 반복(low<high) */
 		  do{
-		    /* list[low]가 피벗보다 작으면 계속 low를 증가 */
 		    do {
 		      low++; // low는 left+1 에서 시작
 		    } while (low<=right && list[low].getBox().getMinX()<pivot.getBox().getMinX());
 
-		    /* list[high]가 피벗보다 크면 계속 high를 감소 */
 		    do {
 		      high--; //high는 right 에서 시작
 		    } while (high>=left && list[high].getBox().getMinX()>pivot.getBox().getMinX());
 
-		    // 만약 low와 high가 교차하지 않았으면 list[low]를 list[high] 교환
 		    if(low<high){
 		    	temp = list[low];
 		    	list[low]=list[high];
@@ -225,15 +234,12 @@ public class Main2 {
 
 		static // 퀵 정렬
 		void quick_sort(Shape list[],int left, int right){
-	
-		  /* 정렬할 범위가 2개 이상의 데이터이면(리스트의 크기가 0이나 1이 아니면) */
-		  if(left<right){
-		    // partition 함수를 호출하여 피벗을 기준으로 리스트를 비균등 분할 -분할(Divide)
-		    int q = partition(list, left, right); // q: 피벗의 위치
 
-		    // 피벗은 제외한 2개의 부분 리스트를 대상으로 순환 호출
-		    quick_sort(list, left, q-1); // (left ~ 피벗 바로 앞) 앞쪽 부분 리스트 정렬 -정복(Conquer)
-		    quick_sort(list, q+1,right); // (피벗 바로 뒤 ~ right) 뒤쪽 부분 리스트 정렬 -정복(Conquer)
+		  if(left<right){
+		    int q = partition(list, left, right); 
+
+		    quick_sort(list, left, q-1); 
+		    quick_sort(list, q+1,right); 
 		  }
 
 		}

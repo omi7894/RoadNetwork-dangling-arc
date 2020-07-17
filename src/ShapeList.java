@@ -141,8 +141,8 @@ public class ShapeList {
 				
 				if(this.getShape(i).getBox().getMaxX()>=this.getShape(j).getBox().getMinX()) {
 					
-					if(this.getShape(i).getBox().getMinY()<this.getShape(j).getBox().getMaxY()||
-							this.getShape(j).getBox().getMinY()<this.getShape(i).getBox().getMaxY()) {
+					if(this.getShape(i).getBox().getMinY()<=this.getShape(j).getBox().getMaxY()||
+							this.getShape(j).getBox().getMinY()<=this.getShape(i).getBox().getMaxY()) {
 						
 						SN1 = this.getShape(i).getStart();
 						EN1 = this.getShape(i).getEnd();
@@ -201,6 +201,36 @@ public class ShapeList {
 		}
 		
 		
+	}
+	public BBox getLargestBox() {
+		BBox Lbox = new BBox();
+		
+		double minX=this.getShape(0).getBox().getMinX();
+		double minY=this.getShape(0).getBox().getMinY();
+		double maxX=this.getShape(0).getBox().getMaxX();
+		double maxY=this.getShape(0).getBox().getMaxY();
+		
+		for(int i=1; i<this.size();i++) {
+			if(minX>this.getShape(i).getBox().getMinX()) {
+				minX=this.getShape(i).getBox().getMinX();
+			}
+			if(minY>this.getShape(i).getBox().getMinY()) {
+				minY=this.getShape(i).getBox().getMinY();
+			}
+			if(maxX<this.getShape(i).getBox().getMaxX()) {
+				maxX=this.getShape(i).getBox().getMaxX();
+			}
+			if(maxY<this.getShape(i).getBox().getMaxY()) {
+				maxY=this.getShape(i).getBox().getMaxY();
+			}
+		}
+		
+		Lbox.setMinX(minX);
+		Lbox.setMaxX(maxX);
+		Lbox.setMinY(minY);
+		Lbox.setMaxY(maxY);
+				
+		return Lbox;
 	}
 
 }
