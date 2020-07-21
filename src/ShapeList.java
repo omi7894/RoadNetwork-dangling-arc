@@ -94,27 +94,27 @@ public class ShapeList {
 				double cal4 = getDistance(SN2.getX(), SN2.getY(), EN2.getX(), EN2.getY());
 
 				int con = 0;
-				if (cal1 == dt) {
+				if (cal1 <= dt) {
 					con++;
 				}
-				if (cal2 == dt) {
+				if (cal2 <= dt) {
 					con++;
 				}
-				if (cal3 == dt) {
+				if (cal3 <= dt) {
 					con++;
 				}
-				if (cal4 == dt) {
+				if (cal4 <= dt) {
 					con++;
 				}
 
 				if (con == 1) {
-					if (cal1 == dt) {
+					if (cal1 <= dt) {
 						this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
 						this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
-					} else if (cal2 == dt) {
+					} else if (cal2 <= dt) {
 						this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
 						this.getShape(j).setDen(this.getShape(j).getDen() + 1);
-					} else if (cal3 == dt) {
+					} else if (cal3 <= dt) {
 						this.getShape(i).setDen(this.getShape(i).getDen() + 1);
 						this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
 					} else {
@@ -128,7 +128,7 @@ public class ShapeList {
 		}
 
 	}
-	public void AddDegreeBySorting() {
+public void AddDegreeBySorting() {
 		
 		Node SN1 = new Node();
 		Node EN1 = new Node();
@@ -141,8 +141,8 @@ public class ShapeList {
 				
 				if(this.getShape(i).getBox().getMaxX()>=this.getShape(j).getBox().getMinX()) {
 					
-					if(this.getShape(i).getBox().getMinY()<=this.getShape(j).getBox().getMaxY()||
-							this.getShape(j).getBox().getMinY()<=this.getShape(i).getBox().getMaxY()) {
+					if(this.getShape(i).getBox().getMinY()<this.getShape(j).getBox().getMaxY()||
+							this.getShape(j).getBox().getMinY()<this.getShape(i).getBox().getMaxY()) {
 						
 						SN1 = this.getShape(i).getStart();
 						EN1 = this.getShape(i).getEnd();
@@ -157,27 +157,27 @@ public class ShapeList {
 						double cal4 = getDistance(SN2.getX(), SN2.getY(), EN2.getX(), EN2.getY());
 
 						int con = 0;
-						if (cal1 == dt) {
+						if (cal1 <= dt) {
 							con++;
 						}
-						if (cal2 == dt) {
+						if (cal2 <= dt) {
 							con++;
 						}
-						if (cal3 == dt) {
+						if (cal3 <= dt) {
 							con++;
 						}
-						if (cal4 == dt) {
+						if (cal4 <= dt) {
 							con++;
 						}
 
 						if (con == 1) {
-							if (cal1 == dt) {
+							if (cal1 <= dt) {
 								this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
 								this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
-							} else if (cal2 == dt) {
+							} else if (cal2 <= dt) {
 								this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
 								this.getShape(j).setDen(this.getShape(j).getDen() + 1);
-							} else if (cal3 == dt) {
+							} else if (cal3 <= dt) {
 								this.getShape(i).setDen(this.getShape(i).getDen() + 1);
 								this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
 							} else {
@@ -202,6 +202,7 @@ public class ShapeList {
 		
 		
 	}
+	
 	public BBox getLargestBox() {
 		BBox Lbox = new BBox();
 		

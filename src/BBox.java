@@ -53,6 +53,10 @@ public class BBox {
 	public BBox[] splitBox() {
 	
 		BBox[] childbox = new BBox[4];
+		childbox[0] = new BBox();
+		childbox[1] = new BBox();
+		childbox[2] = new BBox();
+		childbox[3] = new BBox();
 		
 		childbox[0].setMinX(this.minX);
 		childbox[0].setMaxX((this.minX + this.maxX)/2);

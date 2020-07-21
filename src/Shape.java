@@ -10,6 +10,9 @@ public class Shape {
 	private int dsn;
 	private int den;
 
+	private TreeNode sntree;
+	private TreeNode entree;
+	
 	public Shape() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -25,6 +28,24 @@ public class Shape {
 		this.next = null;
 		this.dsn = 1;
 		this.den = 1;
+		this.sntree=null;
+		this.entree=null;
+	}
+
+	public TreeNode getSntree() {
+		return sntree;
+	}
+
+	public void setSntree(TreeNode sntree) {
+		this.sntree = sntree;
+	}
+
+	public TreeNode getEntree() {
+		return entree;
+	}
+
+	public void setEntree(TreeNode entree) {
+		this.entree = entree;
 	}
 
 	public int getId() {
