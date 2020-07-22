@@ -194,7 +194,7 @@ public class QuadTree {
 					SN2 = cur2.getShape()[j].getStart();
 					EN2 = cur2.getShape()[j].getEnd();
 
-					double dt = 1.0;
+					double dt = 0;
 
 					double cal1 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
 					double cal2 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());

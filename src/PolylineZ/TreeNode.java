@@ -20,7 +20,7 @@ public class TreeNode {
 			box = null;
 			numOfShape=0;
 			child = new TreeNode[4];
-			shape = new Shape[200];
+			shape = new Shape[20000];
 		}
 		
 		public int getNumOfShape() {
