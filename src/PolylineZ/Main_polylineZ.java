@@ -6,15 +6,14 @@ import org.nocrala.tools.gis.data.esri.shapefile.ShapeFileReader;
 import org.nocrala.tools.gis.data.esri.shapefile.ValidationPreferences;
 import org.nocrala.tools.gis.data.esri.shapefile.header.ShapeFileHeader;
 import org.nocrala.tools.gis.data.esri.shapefile.shape.AbstractShape;
-import org.nocrala.tools.gis.data.esri.shapefile.shape.shapes.PolylineShape;
-
+import org.nocrala.tools.gis.data.esri.shapefile.shape.shapes.PolylineZShape;
 
 public class Main_polylineZ {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
-		FileInputStream is = new FileInputStream("C:\\Users\\ETRI\\Documents\\test.shp");
+		FileInputStream is = new FileInputStream("C:\\Users\\ETRI\\Desktop\\HDMap_UTMK_New\\HDMap_UTMK_정표고\\A2_LINK.shp");
 
 		ValidationPreferences prefs = new ValidationPreferences();
 
@@ -36,13 +35,13 @@ public class Main_polylineZ {
 
 			s.getShapeType();
 
-			PolylineShape p = (PolylineShape) s;
+			PolylineZShape p = (PolylineZShape) s;
 			TotalPart += p.getNumberOfParts();
 			TotalPoint += p.getNumberOfPoints();
 			numOfShape++;
 		}
 
-		FileInputStream IS = new FileInputStream("C:\\Users\\ETRI\\Documents\\test.shp");
+		FileInputStream IS = new FileInputStream("C:\\Users\\ETRI\\Desktop\\HDMap_UTMK_New\\HDMap_UTMK_정표고\\A2_LINK.shp");
 
 		ValidationPreferences PREFS = new ValidationPreferences();
 
@@ -68,7 +67,7 @@ public class Main_polylineZ {
 
 		while ((S = R.next()) != null) {
 
-			PolylineShape PL = (PolylineShape) S;
+			PolylineZShape PL = (PolylineZShape) S;
 
 			double minX = PL.getPoints()[0].getX();
 			double minY = PL.getPoints()[0].getY();
@@ -149,6 +148,7 @@ public class Main_polylineZ {
 		QuadTree quadtree = new QuadTree();
 		quadtree.MakeQuadTree(shapelist);
 		quadtree.AddDegree();
+		System.out.println("전체 data 개수 : "+numOfShape);
 		int cnt=0;
 		for(int i=0;i<shapelist.size();i++) {
 			if(shapelist.getShape(i).getDsn()==1 && shapelist.getShape(i).getDen()==1) {cnt++;}
