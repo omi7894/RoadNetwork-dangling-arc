@@ -8,17 +8,8 @@ import org.nocrala.tools.gis.data.esri.shapefile.header.ShapeFileHeader;
 import org.nocrala.tools.gis.data.esri.shapefile.shape.AbstractShape;
 import org.nocrala.tools.gis.data.esri.shapefile.shape.shapes.PolylineShape;
 
-import Polyline.BBox;
-import Polyline.Node;
-import Polyline.Part;
-import Polyline.PartList;
-import Polyline.Point;
-import Polyline.PointList;
-import Polyline.QuadTree;
-import Polyline.Shape;
-import Polyline.ShapeList;
 
-public class Main {
+public class Main_polylineZ {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
@@ -168,6 +159,7 @@ public class Main {
 		//long start = System.currentTimeMillis();
 		//long end = System.currentTimeMillis();
 		//System.out.println("½Ã°£ : "+(end-start)/1000.0);
+		
 	}
 
 }
