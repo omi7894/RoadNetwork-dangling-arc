@@ -156,7 +156,6 @@ public class Main_polyline {
 				}
 				System.out.println(cnt);
 				System.out.println("this is polyline");
-				System.out.println("this is polyline");
 				
 				//long start = System.currentTimeMillis();
 				//long end = System.currentTimeMillis();

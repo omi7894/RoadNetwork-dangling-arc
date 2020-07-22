@@ -46,5 +46,4 @@ public class Point {
 		this.next = next;
 	}
 
-//git test
 }
