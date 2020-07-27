@@ -145,6 +145,7 @@ public class Main_polyline {
 
 		}
 		// ¸í·É
+		///
 		shapelist.AddDegreeBySorting();
 		int cnt = 0;
 		System.out.println(numOfShape);
