@@ -194,12 +194,12 @@ public class QuadTree {
 					SN2 = cur2.getShape()[j].getStart();
 					EN2 = cur2.getShape()[j].getEnd();
 
-					double dt = 0;
+					double dt = 0.1;
 
-					double cal1 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
-					double cal2 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
-					double cal3 = getDistance(SN2.getX(), SN2.getY(), EN1.getX(), EN1.getY());
-					double cal4 = getDistance(SN2.getX(), SN2.getY(), EN2.getX(), EN2.getY());
+					double cal1 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
+					double cal2 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
+					double cal3 = getDistance(EN1.getX(), EN1.getY(), EN2.getX(), EN2.getY());
+					double cal4 = getDistance(EN1.getX(), EN1.getY(), SN2.getX(), SN2.getY());
 
 					int con = 0;
 					if (cal1 <= dt) {
@@ -218,16 +218,16 @@ public class QuadTree {
 					if (con == 1) {
 						if (cal1 <= dt) {
 							cur1.getShape()[i].setDsn(cur1.getShape()[i].getDsn() + 1);
-							cur2.getShape()[j].setDsn(cur2.getShape()[j].getDsn() + 1);
+							cur2.getShape()[j].setDen(cur2.getShape()[j].getDen() + 1);
 						} else if (cal2 <= dt) {
 							cur1.getShape()[i].setDsn(cur1.getShape()[i].getDsn() + 1);
-							cur2.getShape()[j].setDen(cur2.getShape()[j].getDen() + 1);
+							cur2.getShape()[j].setDsn(cur2.getShape()[j].getDsn() + 1);
 						} else if (cal3 <= dt) {
 							cur1.getShape()[i].setDen(cur1.getShape()[i].getDen() + 1);
-							cur2.getShape()[j].setDsn(cur2.getShape()[j].getDsn() + 1);
+							cur2.getShape()[j].setDen(cur2.getShape()[j].getDen() + 1);
 						} else {
 							cur1.getShape()[i].setDen(cur1.getShape()[i].getDen() + 1);
-							cur2.getShape()[j].setDen(cur2.getShape()[j].getDen() + 1);
+							cur2.getShape()[j].setDsn(cur2.getShape()[j].getDsn() + 1);
 						}
 
 					}

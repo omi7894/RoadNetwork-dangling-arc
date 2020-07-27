@@ -8,6 +8,7 @@ public class TreeNode {
 		private BBox box;
 		private Shape[] shape;
 		private int numOfShape;
+		private int level;
 		
 		public TreeNode() {
 			super();
@@ -21,8 +22,17 @@ public class TreeNode {
 			numOfShape=0;
 			child = new TreeNode[4];
 			shape = new Shape[200];
+			level=0;
 		}
 		
+		public int getLevel() {
+			return level;
+		}
+
+		public void setLevel(int level) {
+			this.level = level;
+		}
+
 		public int getNumOfShape() {
 			return numOfShape;
 		}

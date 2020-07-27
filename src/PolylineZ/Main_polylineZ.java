@@ -24,7 +24,7 @@ public class Main_polylineZ {
 		System.out.println("The shape type of this files is " + h.getShapeType());
 
 		AbstractShape s;
-		s = r.next();
+		//s = r.next();
 
 		int numOfShape = 0;
 		int TotalPart = 0;
@@ -49,7 +49,7 @@ public class Main_polylineZ {
 		ShapeFileReader R = new ShapeFileReader(IS, PREFS);
 		ShapeFileHeader H = R.getHeader();
 		AbstractShape S;
-		S = R.next();
+	//	S = R.next();
 
 		Point[] point = new Point[TotalPoint];
 		Node[] node = new Node[TotalPoint];
@@ -147,7 +147,7 @@ public class Main_polylineZ {
 		
 		QuadTree quadtree = new QuadTree();
 		quadtree.MakeQuadTree(shapelist);
-		quadtree.AddDegree();
+		shapelist.AddDegree();
 		System.out.println("전체 data 개수 : "+numOfShape);
 		int cnt=0;
 		for(int i=0;i<shapelist.size();i++) {

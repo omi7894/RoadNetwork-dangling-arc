@@ -87,12 +87,12 @@ public class ShapeList {
 				SN2 = this.getShape(j).getStart();
 				EN2 = this.getShape(j).getEnd();
 
-				double dt = 0;
+				double dt = 0.1;
 
-				double cal1 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
-				double cal2 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
-				double cal3 = getDistance(SN2.getX(), SN2.getY(), EN1.getX(), EN1.getY());
-				double cal4 = getDistance(SN2.getX(), SN2.getY(), EN2.getX(), EN2.getY());
+				double cal1 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
+				double cal2 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
+				double cal3 = getDistance(EN1.getX(), EN1.getY(), EN2.getX(), EN2.getY());
+				double cal4 = getDistance(EN1.getX(), EN1.getY(), SN2.getX(), SN2.getY());
 
 				int con = 0;
 				if (cal1 <= dt) {
@@ -111,16 +111,16 @@ public class ShapeList {
 				if (con == 1) {
 					if (cal1 <= dt) {
 						this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
-						this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
+						this.getShape(j).setDen(this.getShape(j).getDen() + 1);
 					} else if (cal2 <= dt) {
 						this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
-						this.getShape(j).setDen(this.getShape(j).getDen() + 1);
+						this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
 					} else if (cal3 <= dt) {
 						this.getShape(i).setDen(this.getShape(i).getDen() + 1);
-						this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
+						this.getShape(j).setDen(this.getShape(j).getDen() + 1);
 					} else {
 						this.getShape(i).setDen(this.getShape(i).getDen() + 1);
-						this.getShape(j).setDen(this.getShape(j).getDen() + 1);
+						this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
 					}
 
 				}
@@ -142,20 +142,20 @@ public void AddDegreeBySorting() {
 				
 				if(this.getShape(i).getBox().getMaxX()>=this.getShape(j).getBox().getMinX()) {
 					
-					if(this.getShape(i).getBox().getMinY()<this.getShape(j).getBox().getMaxY()||
-							this.getShape(j).getBox().getMinY()<this.getShape(i).getBox().getMaxY()) {
+					if(this.getShape(i).getBox().getMinY()<=this.getShape(j).getBox().getMaxY()||
+							this.getShape(j).getBox().getMinY()<=this.getShape(i).getBox().getMaxY()) {
 						
 						SN1 = this.getShape(i).getStart();
 						EN1 = this.getShape(i).getEnd();
 						SN2 = this.getShape(j).getStart();
 						EN2 = this.getShape(j).getEnd();
 
-						double dt = 0;
+						double dt = 0.1;
 
-						double cal1 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
-						double cal2 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
-						double cal3 = getDistance(SN2.getX(), SN2.getY(), EN1.getX(), EN1.getY());
-						double cal4 = getDistance(SN2.getX(), SN2.getY(), EN2.getX(), EN2.getY());
+						double cal1 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
+						double cal2 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
+						double cal3 = getDistance(EN1.getX(), EN1.getY(), EN2.getX(), EN2.getY());
+						double cal4 = getDistance(EN1.getX(), EN1.getY(), SN2.getX(), SN2.getY());
 
 						int con = 0;
 						if (cal1 <= dt) {
@@ -174,16 +174,16 @@ public void AddDegreeBySorting() {
 						if (con == 1) {
 							if (cal1 <= dt) {
 								this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
-								this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
+								this.getShape(j).setDen(this.getShape(j).getDen() + 1);
 							} else if (cal2 <= dt) {
 								this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
-								this.getShape(j).setDen(this.getShape(j).getDen() + 1);
+								this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
 							} else if (cal3 <= dt) {
 								this.getShape(i).setDen(this.getShape(i).getDen() + 1);
-								this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
+								this.getShape(j).setDen(this.getShape(j).getDen() + 1);
 							} else {
 								this.getShape(i).setDen(this.getShape(i).getDen() + 1);
-								this.getShape(j).setDen(this.getShape(j).getDen() + 1);
+								this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
 							}
 
 						}
