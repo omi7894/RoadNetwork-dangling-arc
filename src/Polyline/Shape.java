@@ -14,13 +14,29 @@ public class Shape {
 	private TreeNode sntree;
 	private TreeNode entree;
 	
+	private int listnum;
+	private double SNminDist;
+	private double ENminDist;
+	
 	public Shape() {
 		super();
 		// TODO Auto-generated constructor stub
+		this.id = -1;
+		this.start = null;
+		this.end = null;
+		this.list = null;
+		this.box = null;
+		this.next = null;
+		this.dsn = 1;
+		this.den = 1;
+		this.sntree=null;
+		this.entree=null;
+		this.listnum = -1; 
+		this.SNminDist = -1;
+		this.ENminDist = -1;
 	}
 
 	public Shape(int id) {
-		super();
 		this.id = id;
 		this.start = null;
 		this.end = null;
@@ -31,6 +47,34 @@ public class Shape {
 		this.den = 1;
 		this.sntree=null;
 		this.entree=null;
+		this.listnum = -1; 
+		this.SNminDist = -1;
+		this.ENminDist = -1;
+	}
+	
+
+	public double getSNminDist() {
+		return SNminDist;
+	}
+
+	public void setSNminDist(double sNminDist) {
+		SNminDist = sNminDist;
+	}
+
+	public double getENminDist() {
+		return ENminDist;
+	}
+
+	public void setENminDist(double eNminDist) {
+		ENminDist = eNminDist;
+	}
+
+	public int getListnum() {
+		return listnum;
+	}
+
+	public void setListnum(int listnum) {
+		this.listnum = listnum;
 	}
 
 	public TreeNode getSntree() {

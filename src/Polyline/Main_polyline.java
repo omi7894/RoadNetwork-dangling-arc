@@ -1,12 +1,13 @@
 package Polyline;
 
 import java.io.FileInputStream;
-
 import org.nocrala.tools.gis.data.esri.shapefile.ShapeFileReader;
 import org.nocrala.tools.gis.data.esri.shapefile.ValidationPreferences;
 import org.nocrala.tools.gis.data.esri.shapefile.header.ShapeFileHeader;
 import org.nocrala.tools.gis.data.esri.shapefile.shape.AbstractShape;
 import org.nocrala.tools.gis.data.esri.shapefile.shape.shapes.PolylineShape;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class Main_polyline {
 
@@ -16,7 +17,7 @@ public class Main_polyline {
 		// TODO Auto-generated method stub
 		//  "C:\\Users\\ETRI\\Desktop\\소규모 도로 데이터2\\cheongju3.shp" - 24개
 		//  "C:\\Users\\ETRI\\Documents\\test.shp"  - 485개
-		FileInputStream is = new FileInputStream("C:\\Users\\ETRI\\Documents\\test.shp");
+		FileInputStream is = new FileInputStream("C:\\Users\\ETRI\\Desktop\\소규모 도로 데이터2\\cheongju3.shp");
 
 		ValidationPreferences prefs = new ValidationPreferences();
 
@@ -44,7 +45,7 @@ public class Main_polyline {
 			numOfShape++;
 		}
 
-		FileInputStream IS = new FileInputStream("C:\\Users\\ETRI\\Documents\\test.shp");
+		FileInputStream IS = new FileInputStream("C:\\Users\\ETRI\\Desktop\\소규모 도로 데이터2\\cheongju3.shp");
 
 		ValidationPreferences PREFS = new ValidationPreferences();
 
@@ -144,20 +145,18 @@ public class Main_polyline {
 			ShapeID++;
 
 		}
+
 		// 명령
-		///
-		shapelist.AddDegreeBySorting();
+		//shapelist.AddDegreeBySorting2();
+		shapelist.MakeLinkedList();
 		int cnt = 0;
-		System.out.println(numOfShape);
-		for (int i = 0; i < shapelist.size(); i++) {
-			if (shapelist.getShape(i).getDsn() == 1 && shapelist.getShape(i).getDen() == 1) {
-				cnt++;
-			}
-		}
-		System.out.println(cnt);
+		
+		System.out.println("전체data : "+numOfShape);
+		//System.out.println("dangling 개수 : " + cnt);
 		System.out.println("this is polyline");
 		// long start = System.currentTimeMillis();
 		// long end = System.currentTimeMillis();
 		// System.out.println("시간 : "+(end-start)/1000.0);
 	}
+	
 }

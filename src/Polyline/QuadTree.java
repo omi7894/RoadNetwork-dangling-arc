@@ -171,7 +171,7 @@ public class QuadTree {
 			}
 		}
 
-		// ´Ù½Ã....
+		//
 /*
 		for (int i = 0; i < shapelist.size(); i++) {
 			currentTN = treenode[0];
