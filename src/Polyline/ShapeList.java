@@ -101,7 +101,7 @@ public class ShapeList {
 				SN2 = this.getShape(j).getStart();
 				EN2 = this.getShape(j).getEnd();
 
-				double dt = 0;
+				double dt = 1;
 
 				double cal1 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
 				double cal2 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
@@ -147,7 +147,7 @@ public class ShapeList {
 		Node EN1 = new Node();
 		Node SN2 = new Node();
 		Node EN2 = new Node();
-		double dt = 0;
+		double dt = 1;
 
 		for (int i = 0; i < this.size() - 1; i++) {
 
@@ -302,7 +302,7 @@ public class ShapeList {
 			L.add(this.getShape(i));
 		}
 
-		ShapeList[] list = new ShapeList[200];
+		ShapeList[] list = new ShapeList[20000];
 
 		int numOflist = 0;
 
@@ -310,7 +310,7 @@ public class ShapeList {
 		Node EN1 = new Node();
 		Node SN2 = new Node();
 		Node EN2 = new Node();
-		double dt = 8;
+		double dt = 6;
 
 		for (int j = 0; j < L.size(); j++) {
 
@@ -364,7 +364,7 @@ public class ShapeList {
 		System.out.println("delta : "+dt);
 		int  i=0;
 		for (i = 0; i < numOflist; i++) {
-			System.out.println(i + 1 + "번째 리스트 : "+list[i].size()+"개");
+			System.out.println(i+1+"번 리스트  : "+list[i].size()+"개");
 		}
 		System.out.println("총"+i+"개의 리스트");
 

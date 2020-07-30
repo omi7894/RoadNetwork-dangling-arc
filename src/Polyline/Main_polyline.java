@@ -17,7 +17,7 @@ public class Main_polyline {
 		// TODO Auto-generated method stub
 		//  "C:\\Users\\ETRI\\Desktop\\소규모 도로 데이터2\\cheongju3.shp" - 24개
 		//  "C:\\Users\\ETRI\\Documents\\test.shp"  - 485개
-		FileInputStream is = new FileInputStream("C:\\Users\\ETRI\\Desktop\\소규모 도로 데이터2\\cheongju3.shp");
+		FileInputStream is = new FileInputStream("C:\\Users\\ETRI\\Documents\\test.shp");
 
 		ValidationPreferences prefs = new ValidationPreferences();
 
@@ -45,7 +45,7 @@ public class Main_polyline {
 			numOfShape++;
 		}
 
-		FileInputStream IS = new FileInputStream("C:\\Users\\ETRI\\Desktop\\소규모 도로 데이터2\\cheongju3.shp");
+		FileInputStream IS = new FileInputStream("C:\\Users\\ETRI\\Documents\\test.shp");
 
 		ValidationPreferences PREFS = new ValidationPreferences();
 
@@ -147,12 +147,21 @@ public class Main_polyline {
 		}
 
 		// 명령
-		//shapelist.AddDegreeBySorting2();
-		shapelist.MakeLinkedList();
+		//shapelist.AddDegreeBySorting();
+		//shapelist.MakeLinkedList();
+		QuadTree quadtree = new QuadTree();
+		quadtree.MakeQuadTree(shapelist);
+		quadtree.AddDegree();
+		
 		int cnt = 0;
+		for(int i=0;i<shapelist.size();i++) {
+			if(shapelist.getShape(i).getDsn()==1 && shapelist.getShape(i).getDen()==1) {
+				cnt++;
+			}
+		}
 		
 		System.out.println("전체data : "+numOfShape);
-		//System.out.println("dangling 개수 : " + cnt);
+		System.out.println("dangling 개수 : " + cnt);
 		System.out.println("this is polyline");
 		// long start = System.currentTimeMillis();
 		// long end = System.currentTimeMillis();
