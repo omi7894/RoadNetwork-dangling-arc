@@ -147,11 +147,14 @@ public class Main_polyline {
 		}
 
 		// 명령
+		shapelist.AddDegree();
 		//shapelist.AddDegreeBySorting();
 		//shapelist.MakeLinkedList();
-		QuadTree quadtree = new QuadTree();
-		quadtree.MakeQuadTree(shapelist);
-		quadtree.AddDegree();
+		//QuadTree quadtree = new QuadTree();
+		//uadtree.MakeQuadTree(shapelist);
+		
+		//quadtree.AddDegree();
+	
 		
 		int cnt = 0;
 		for(int i=0;i<shapelist.size();i++) {
@@ -159,6 +162,7 @@ public class Main_polyline {
 				cnt++;
 			}
 		}
+		
 		
 		System.out.println("전체data : "+numOfShape);
 		System.out.println("dangling 개수 : " + cnt);

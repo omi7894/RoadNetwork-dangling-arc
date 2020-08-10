@@ -82,35 +82,7 @@ public class BBox {
 		childbox[3].setMaxY((this.minY + this.maxY)/2.0- dt/2.0);
 		
 		return childbox;
-		
-	    /* 
-		BBox[] childbox = new BBox[4];
-		childbox[0] = new BBox();
-		childbox[1] = new BBox();
-		childbox[2] = new BBox();
-		childbox[3] = new BBox();
-		
-		childbox[0].setMinX(this.minX);
-		childbox[0].setMaxX((this.minX + this.maxX)/2.0);
-		childbox[0].setMinY((this.minY + this.maxY)/2.0);
-		childbox[0].setMaxY(this.maxY);
-		
-		childbox[1].setMinX((this.minX + this.maxX)/2.0);
-		childbox[1].setMaxX(this.maxX);
-		childbox[1].setMinY((this.minY + this.maxY)/2.0);
-		childbox[1].setMaxY(this.maxY);
-		
-		childbox[2].setMinX((this.minX + this.maxX)/2.0);
-		childbox[2].setMaxX(this.maxX);
-		childbox[2].setMinY(this.minY);
-		childbox[2].setMaxY((this.minY + this.maxY)/2.0);
-		
-		childbox[3].setMinX(this.minX);
-		childbox[3].setMaxX((this.minX + this.maxX)/2.0);
-		childbox[3].setMinY(this.minY);
-		childbox[3].setMaxY((this.minY + this.maxY)/2.0);
-		
-		return childbox;*/
+
 	}
 	
 	

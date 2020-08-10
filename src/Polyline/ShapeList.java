@@ -101,7 +101,7 @@ public class ShapeList {
 				SN2 = this.getShape(j).getStart();
 				EN2 = this.getShape(j).getEnd();
 
-				double dt = 1;
+				double dt = 2;
 
 				double cal1 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
 				double cal2 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
@@ -147,7 +147,7 @@ public class ShapeList {
 		Node EN1 = new Node();
 		Node SN2 = new Node();
 		Node EN2 = new Node();
-		double dt = 1;
+		double dt = 0;
 
 		for (int i = 0; i < this.size() - 1; i++) {
 
@@ -246,7 +246,7 @@ public class ShapeList {
 		Node EN1 = new Node();
 		Node SN2 = new Node();
 		Node EN2 = new Node();
-		double dt = 20;
+		double dt = 0;
 
 		for (int i = 0; i < this.size() - 1; i++) {
 
