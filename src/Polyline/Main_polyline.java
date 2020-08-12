@@ -38,6 +38,7 @@ public class Main_polyline {
 		// long end = System.currentTimeMillis();
 		// System.out.println("시간 : "+(end-start)/1000.0);
 		
+	
 		int a=1;//종료여부확인
 		while(true) {
 			txt_file = "";
