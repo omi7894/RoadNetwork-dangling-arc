@@ -51,9 +51,9 @@ public class BBox {
 		this.maxY = maxY;
 	}
 	
-	public BBox[] splitBox() {
+	public BBox[] splitBox(double dt) {
 		//오차 고려해서 다시ㅎㅎ
-		int dt=1;
+		//double dt=0;
 		
 		BBox[] childbox = new BBox[4];
 		childbox[0] = new BBox();

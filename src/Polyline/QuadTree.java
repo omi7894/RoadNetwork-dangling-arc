@@ -27,7 +27,7 @@ public class QuadTree {
 		}
 	}
 
-	public void MakeQuadTree(ShapeList shapelist) {
+	public void MakeQuadTree(ShapeList shapelist, double dt) {
 		// QuadTree만들기...
 
 		// TreeNode끼리 연결
@@ -58,30 +58,30 @@ public class QuadTree {
 
 		treenode[0].setBox(shapelist.getLargestBox());
 
-		treenode[1].setBox(treenode[0].getBox().splitBox()[0]);
-		treenode[2].setBox(treenode[0].getBox().splitBox()[1]);
-		treenode[3].setBox(treenode[0].getBox().splitBox()[2]);
-		treenode[4].setBox(treenode[0].getBox().splitBox()[3]);
+		treenode[1].setBox(treenode[0].getBox().splitBox(dt)[0]);
+		treenode[2].setBox(treenode[0].getBox().splitBox(dt)[1]);
+		treenode[3].setBox(treenode[0].getBox().splitBox(dt)[2]);
+		treenode[4].setBox(treenode[0].getBox().splitBox(dt)[3]);
 
-		treenode[5].setBox(treenode[1].getBox().splitBox()[0]);
-		treenode[6].setBox(treenode[1].getBox().splitBox()[1]);
-		treenode[7].setBox(treenode[1].getBox().splitBox()[2]);
-		treenode[8].setBox(treenode[1].getBox().splitBox()[3]);
+		treenode[5].setBox(treenode[1].getBox().splitBox(dt)[0]);
+		treenode[6].setBox(treenode[1].getBox().splitBox(dt)[1]);
+		treenode[7].setBox(treenode[1].getBox().splitBox(dt)[2]);
+		treenode[8].setBox(treenode[1].getBox().splitBox(dt)[3]);
 
-		treenode[9].setBox(treenode[2].getBox().splitBox()[0]);
-		treenode[10].setBox(treenode[2].getBox().splitBox()[1]);
-		treenode[11].setBox(treenode[2].getBox().splitBox()[2]);
-		treenode[12].setBox(treenode[2].getBox().splitBox()[3]);
+		treenode[9].setBox(treenode[2].getBox().splitBox(dt)[0]);
+		treenode[10].setBox(treenode[2].getBox().splitBox(dt)[1]);
+		treenode[11].setBox(treenode[2].getBox().splitBox(dt)[2]);
+		treenode[12].setBox(treenode[2].getBox().splitBox(dt)[3]);
 
-		treenode[13].setBox(treenode[3].getBox().splitBox()[0]);
-		treenode[14].setBox(treenode[3].getBox().splitBox()[1]);
-		treenode[15].setBox(treenode[3].getBox().splitBox()[2]);
-		treenode[16].setBox(treenode[3].getBox().splitBox()[3]);
+		treenode[13].setBox(treenode[3].getBox().splitBox(dt)[0]);
+		treenode[14].setBox(treenode[3].getBox().splitBox(dt)[1]);
+		treenode[15].setBox(treenode[3].getBox().splitBox(dt)[2]);
+		treenode[16].setBox(treenode[3].getBox().splitBox(dt)[3]);
 
-		treenode[17].setBox(treenode[4].getBox().splitBox()[0]);
-		treenode[18].setBox(treenode[4].getBox().splitBox()[1]);
-		treenode[19].setBox(treenode[4].getBox().splitBox()[2]);
-		treenode[20].setBox(treenode[4].getBox().splitBox()[3]);
+		treenode[17].setBox(treenode[4].getBox().splitBox(dt)[0]);
+		treenode[18].setBox(treenode[4].getBox().splitBox(dt)[1]);
+		treenode[19].setBox(treenode[4].getBox().splitBox(dt)[2]);
+		treenode[20].setBox(treenode[4].getBox().splitBox(dt)[3]);
 
 		for (int i = 1; i <= 4; i++) {
 			treenode[0].makeChild(i - 1, treenode[i]);
@@ -171,9 +171,9 @@ public class QuadTree {
 				}
 			}
 		}
-  */
+  	*/
 		/////////////////////////////////
-
+		
 		for (int i = 0; i < shapelist.size(); i++) {
 			currentTN = treenode[0];
 
@@ -237,6 +237,7 @@ public class QuadTree {
 				}
 			}
 		}
+	
 ///////////////////////////
 		
 	}
@@ -246,7 +247,7 @@ public class QuadTree {
 		return Math.sqrt(Math.pow(Math.abs(x1 - x), 2) + Math.pow(Math.abs(y1 - y), 2));
 
 	}
-	public  void AddDegreeItself(TreeNode cur) {
+	public  void AddDegreeItself(TreeNode cur, double dt) {
 	
 		Node SN1 = new Node();
 		Node EN1 = new Node();
@@ -262,44 +263,30 @@ public class QuadTree {
 					SN2 = cur.getShape()[j].getStart();
 					EN2 = cur.getShape()[j].getEnd();
 
-					double dt = 0;
+					//double dt = 0;
 
 					double cal1 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
 					double cal2 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
 					double cal3 = getDistance(EN1.getX(), EN1.getY(), EN2.getX(), EN2.getY());
 					double cal4 = getDistance(EN1.getX(), EN1.getY(), SN2.getX(), SN2.getY());
 					
-					int con = 0;
-					if (cal1 <= dt) {
-						con++;
-					}
-					if (cal2 <= dt) {
-						con++;
-					}
-					if (cal3 <= dt) {
-						con++;
-					}
-					if (cal4 <= dt) {
-						con++;
-					}
-
-					if (con == 1) {
+	
 						if (cal1 <= dt) {
 							cur.getShape()[i].setDsn(cur.getShape()[i].getDsn() + 1);
 							cur.getShape()[j].setDen(cur.getShape()[j].getDen() + 1);
-						} else if (cal2 <= dt) {
+						} 
+						if (cal2 <= dt) {
 							cur.getShape()[i].setDsn(cur.getShape()[i].getDsn() + 1);
 							cur.getShape()[j].setDsn(cur.getShape()[j].getDsn() + 1);
-						} else if (cal3 <= dt) {
+						}
+						if (cal3 <= dt) {
 							cur.getShape()[i].setDen(cur.getShape()[i].getDen() + 1);
 							cur.getShape()[j].setDen(cur.getShape()[j].getDen() + 1);
-						} else {
+						} 
+						if(cal4 <= dt){
 							cur.getShape()[i].setDen(cur.getShape()[i].getDen() + 1);
 							cur.getShape()[j].setDsn(cur.getShape()[j].getDsn() + 1);
 						}
-					}
-				   
-				   
 			   }
 		   }
 	   }
@@ -307,7 +294,7 @@ public class QuadTree {
 		
 	}
 
-	public void AddDegreewithchild(TreeNode cur1, TreeNode cur2) {
+	public void AddDegreewithchild(TreeNode cur1, TreeNode cur2, double dt) {
 
 		Node SN1 = new Node();
 		Node EN1 = new Node();
@@ -321,70 +308,60 @@ public class QuadTree {
 				SN2 = cur2.getShape()[j].getStart();
 				EN2 = cur2.getShape()[j].getEnd();
 
-				double dt = 0;
+				//double dt = 0;
 
 				double cal1 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
 				double cal2 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
 				double cal3 = getDistance(EN1.getX(), EN1.getY(), EN2.getX(), EN2.getY());
 				double cal4 = getDistance(EN1.getX(), EN1.getY(), SN2.getX(), SN2.getY());
 				
-				int con = 0;
-				if (cal1 <= dt) {
-					con++;
-				}
-				if (cal2 <= dt) {
-					con++;
-				}
-				if (cal3 <= dt) {
-					con++;
-				}
-				if (cal4 <= dt) {
-					con++;
-				}
-
-				if (con == 1) {
+		
+			
 					if (cal1 <= dt) {
 						cur1.getShape()[i].setDsn(cur1.getShape()[i].getDsn() + 1);
 						cur2.getShape()[j].setDen(cur2.getShape()[j].getDen() + 1);
-					} else if (cal2 <= dt) {
+					}
+					if (cal2 <= dt) {
 						cur1.getShape()[i].setDsn(cur1.getShape()[i].getDsn() + 1);
 						cur2.getShape()[j].setDsn(cur2.getShape()[j].getDsn() + 1);
-					} else if (cal3 <= dt) {
+					}
+					if (cal3 <= dt) {
 						cur1.getShape()[i].setDen(cur1.getShape()[i].getDen() + 1);
 						cur2.getShape()[j].setDen(cur2.getShape()[j].getDen() + 1);
-					} else {
+					} 
+					if(cal4 <= dt) {
 						cur1.getShape()[i].setDen(cur1.getShape()[i].getDen() + 1);
 						cur2.getShape()[j].setDsn(cur2.getShape()[j].getDsn() + 1);
 					}
-				}
+				
 			}
 		}
 
 	}
 
-	public void search(TreeNode cur) {
+	public void search(TreeNode cur,double dt) {
 		if(cur==null) {return;}
 		else {
-			AddDegreeItself(cur);
-			search(cur.getChild()[0]);
-			search(cur.getChild()[1]);
-			search(cur.getChild()[2]);
-			search(cur.getChild()[3]);
+			AddDegreeItself(cur,dt);
+			search(cur.getChild()[0],dt);
+			search(cur.getChild()[1],dt);
+			search(cur.getChild()[2],dt);
+			search(cur.getChild()[3],dt);
 			
 		}
 	}
 
-	public void AddDegree() {
+	public void AddDegree(double dt) {
 		TreeNode currentTN = new TreeNode();
 		currentTN = this.root;
 		
-		search(this.root);
+		search(this.root,dt);
 		
 		for (int i = 0; i < 4; i++) {
-			AddDegreewithchild(currentTN, currentTN.getChild()[i]);
+			AddDegreewithchild(currentTN, currentTN.getChild()[i],dt);
 			for (int j = 0; j < 4; j++) {
-				AddDegreewithchild(currentTN.getChild()[i], currentTN.getChild()[i].getChild()[j]);
-				AddDegreewithchild(currentTN, currentTN.getChild()[i].getChild()[j]);
+				AddDegreewithchild(currentTN.getChild()[i], currentTN.getChild()[i].getChild()[j],dt);
+				AddDegreewithchild(currentTN, currentTN.getChild()[i].getChild()[j],dt);
 			}
 		}
 		

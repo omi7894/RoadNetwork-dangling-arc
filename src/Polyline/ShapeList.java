@@ -3,6 +3,7 @@ package Polyline;
 import java.util.LinkedList;
 import java.util.Queue;
 
+
 public class ShapeList {
 
 	private Shape head;
@@ -87,7 +88,7 @@ public class ShapeList {
 
 	}
 
-	public void AddDegree() {
+	public void AddDegree(double dt) {
 
 		Node SN1 = new Node();
 		Node EN1 = new Node();
@@ -101,53 +102,41 @@ public class ShapeList {
 				SN2 = this.getShape(j).getStart();
 				EN2 = this.getShape(j).getEnd();
 
-				double dt = 2;
+				//double dt=0;
 
 				double cal1 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
 				double cal2 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
 				double cal3 = getDistance(EN1.getX(), EN1.getY(), EN2.getX(), EN2.getY());
 				double cal4 = getDistance(EN1.getX(), EN1.getY(), SN2.getX(), SN2.getY());
 
-				int con = 0;
 				if (cal1 <= dt) {
-					con++;
+					this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
+					this.getShape(j).setDen(this.getShape(j).getDen() + 1);
 				}
 				if (cal2 <= dt) {
-					con++;
+					this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
+					this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
 				}
 				if (cal3 <= dt) {
-					con++;
+					this.getShape(i).setDen(this.getShape(i).getDen() + 1);
+					this.getShape(j).setDen(this.getShape(j).getDen() + 1);
 				}
-				if (cal4 <= dt) {
-					con++;
+				if (cal4<=dt) {
+					this.getShape(i).setDen(this.getShape(i).getDen() + 1);
+					this.getShape(j).setDen(this.getShape(j).getDen() + 1);
 				}
-
-				if (con == 1) {
-					if (cal1 <= dt) {
-						this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
-						this.getShape(j).setDen(this.getShape(j).getDen() + 1);
-					} else if (cal2 <= dt) {
-						this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
-						this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
-					} else if (cal3 <= dt) {
-						this.getShape(i).setDen(this.getShape(i).getDen() + 1);
-						this.getShape(j).setDen(this.getShape(j).getDen() + 1);
-					} else {
-						this.getShape(i).setDen(this.getShape(i).getDen() + 1);
-						this.getShape(j).setDen(this.getShape(j).getDen() + 1);
-					}
-				}
+				
 			}
 		}
 	}
 
-	public void AddDegreeBySorting() { // degree´Ã¸®±â
+	public void AddDegreeBySorting(double dt) { // degree´Ã¸®±â
 
 		Node SN1 = new Node();
 		Node EN1 = new Node();
 		Node SN2 = new Node();
 		Node EN2 = new Node();
-		double dt = 0;
+		//double dt = 0;
 
 		for (int i = 0; i < this.size() - 1; i++) {
 
@@ -168,35 +157,21 @@ public class ShapeList {
 						double cal3 = getDistance(EN1.getX(), EN1.getY(), EN2.getX(), EN2.getY());
 						double cal4 = getDistance(EN1.getX(), EN1.getY(), SN2.getX(), SN2.getY());
 
-						int con = 0;
 						if (cal1 <= dt) {
-							con++;
+							this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
+							this.getShape(j).setDen(this.getShape(j).getDen() + 1);
 						}
 						if (cal2 <= dt) {
-							con++;
+							this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
+							this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
 						}
 						if (cal3 <= dt) {
-							con++;
+							this.getShape(i).setDen(this.getShape(i).getDen() + 1);
+							this.getShape(j).setDen(this.getShape(j).getDen() + 1);
 						}
-						if (cal4 <= dt) {
-							con++;
-						}
-
-						if (con == 1) {
-							if (cal1 <= dt) {
-								this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
-								this.getShape(j).setDen(this.getShape(j).getDen() + 1);
-							} else if (cal2 <= dt) {
-								this.getShape(i).setDsn(this.getShape(i).getDsn() + 1);
-								this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
-							} else if (cal3 <= dt) {
-								this.getShape(i).setDen(this.getShape(i).getDen() + 1);
-								this.getShape(j).setDen(this.getShape(j).getDen() + 1);
-							} else {
-								this.getShape(i).setDen(this.getShape(i).getDen() + 1);
-								this.getShape(j).setDsn(this.getShape(j).getDsn() + 1);
-							}
-
+						if (cal4<=dt) {
+							this.getShape(i).setDen(this.getShape(i).getDen() + 1);
+							this.getShape(j).setDen(this.getShape(j).getDen() + 1);
 						}
 
 					}
@@ -310,7 +285,7 @@ public class ShapeList {
 		Node EN1 = new Node();
 		Node SN2 = new Node();
 		Node EN2 = new Node();
-		double dt = 6;
+		double dt = 2;
 
 		for (int j = 0; j < L.size(); j++) {
 
