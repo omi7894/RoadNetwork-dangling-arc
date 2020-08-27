@@ -285,7 +285,7 @@ public class ShapeList {
 		Node EN1 = new Node();
 		Node SN2 = new Node();
 		Node EN2 = new Node();
-		double dt = 2;
+		double dt = 0;
 
 		for (int j = 0; j < L.size(); j++) {
 
@@ -404,4 +404,55 @@ public class ShapeList {
 
 	}
 
+	
+	public void FindReverse() { //Start-Start , End-End 만나는 것 갯수 세기
+		
+		int num=1;
+		
+		Node SN1 = new Node();
+		Node EN1 = new Node();
+		Node SN2 = new Node();
+		Node EN2 = new Node();
+		
+		for (int i = 0; i < this.size() - 1; i++) {
+			for (int j = i + 1; j < this.size(); j++) {
+				SN1 = this.getShape(i).getStart();
+				EN1 = this.getShape(i).getEnd();
+				SN2 = this.getShape(j).getStart();
+				EN2 = this.getShape(j).getEnd();
+
+				double dt=0;
+
+				double cal1 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
+				double cal2 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
+				double cal3 = getDistance(EN1.getX(), EN1.getY(), EN2.getX(), EN2.getY());
+				double cal4 = getDistance(EN1.getX(), EN1.getY(), SN2.getX(), SN2.getY());
+
+				if(cal2 <= dt ) {
+					int a1 = this.getShape(i).getId();
+					int a2 = this.getShape(j).getId();
+					System.out.println(num+"번째 댕글링 : "+a1+" , "+a2+"(Start Node)");
+					num++;
+				}
+				if(cal4 <= dt ) {
+					int a1 = this.getShape(i).getId();
+					int a2 = this.getShape(j).getId();
+					System.out.println(num+"번째 댕글링 : "+a1+" , "+a2+" (End Node)");
+					num++;
+				}
+				
+			}
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 }
+
+

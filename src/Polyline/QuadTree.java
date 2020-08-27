@@ -19,8 +19,8 @@ public class QuadTree {
 	}
 
 	public boolean Include(Node node, TreeNode treenode) {
-		if (treenode.getBox().getMinX() < node.getX() && treenode.getBox().getMaxX() > node.getX()
-				&& treenode.getBox().getMinY() < node.getY() && treenode.getBox().getMaxY() > node.getY()) {
+		if (treenode.getBox().getMinX() <= node.getX() && treenode.getBox().getMaxX() >= node.getX()
+				&& treenode.getBox().getMinY() <= node.getY() && treenode.getBox().getMaxY() >= node.getY()) {
 			return true;
 		} else {
 			return false;
@@ -112,17 +112,17 @@ public class QuadTree {
 		TreeNode currentTN = new TreeNode();
 
 		//////////////////////////////////////// quadtree 다시
-		/*
-		currentTN = this.root;
+		
+		currentTN = treenode[0];
 		for (int i = 0; i < shapelist.size(); i++) {
-			shapelist.getShape(i).setSntree(this.root);
-			shapelist.getShape(i).setEntree(this.root);
+			shapelist.getShape(i).setSntree(treenode[0]);
+			shapelist.getShape(i).setEntree(treenode[0]);
 		}
 		for (int i = 0; i < shapelist.size(); i++) {
 			Shape sp = new Shape();
 			sp = shapelist.getShape(i);
 			while(true) {
-				if (sp.getSntree() == sp.getEntree() && sp.getSntree().getLevel()!=2) {
+				if (sp.getSntree() == sp.getEntree() && sp.getSntree().getLevel() !=2) {
 
 						if (Include(sp.getStart(), sp.getSntree().getChild()[0])) {
 							sp.setSntree(sp.getSntree().getChild()[0]);
@@ -132,9 +132,8 @@ public class QuadTree {
 							sp.setSntree(sp.getSntree().getChild()[2]);
 						} else if(Include(sp.getStart(), sp.getSntree().getChild()[3])){
 							sp.setSntree(sp.getSntree().getChild()[3]);
-						} else {
-						//	continue;
 						}
+						
 						if (Include(sp.getEnd(), sp.getEntree().getChild()[0])) {
 							sp.setEntree(sp.getEntree().getChild()[0]);
 						} else if (Include(sp.getEnd(), sp.getEntree().getChild()[1])) {
@@ -143,11 +142,8 @@ public class QuadTree {
 							sp.setEntree(sp.getEntree().getChild()[2]);
 						} else if(Include(sp.getEnd(), sp.getEntree().getChild()[3])){
 							sp.setEntree(sp.getEntree().getChild()[3]);
-						} else {
-						//	continue;
-						}			
+						}		
 					
-				
 				}
 				else {
 					//level을 추가하자
@@ -171,9 +167,9 @@ public class QuadTree {
 				}
 			}
 		}
-  	*/
+  	
 		/////////////////////////////////
-		
+		/*
 		for (int i = 0; i < shapelist.size(); i++) {
 			currentTN = treenode[0];
 
@@ -237,9 +233,9 @@ public class QuadTree {
 				}
 			}
 		}
-	
+	*/
 ///////////////////////////
-		
+
 	}
 
 	public double getDistance(double x, double y, double x1, double y1) {

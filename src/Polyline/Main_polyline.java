@@ -14,8 +14,8 @@ import java.util.LinkedList;
 public class Main_polyline {
 	
 	static String txt_file;//파일이름
-	static int numOfShape = 0;
-	static ShapeList shapelist;
+	static int numOfShape = 0; //data 개수
+	static ShapeList shapelist; 
 	static String shapeType;
 	static double delta;//오차범위
 
@@ -27,7 +27,7 @@ public class Main_polyline {
 		//"C:\\Users\\ETRI\\Documents\\test.shp"  - 485개
 		//"C:\\Users\\ETRI\\Desktop\\상수관로(WTL_PIPE_LM)\\WTL_PIPE_LM_Down3.shp" - 상수관(565)
 		//"C:\\Users\\ETRI\\Desktop\\하수관로(SWL_PIPE_LM)\\SWL_PIPE_LM_Down3.shp" - 하수관(454)
-		//shapelist.AddDegree(1);		
+		//shapelist.AddDegree();
 		//shapelist.AddDegreeBySorting();
 		//shapelist.MakeLinkedList();
 		//QuadTree quadtree = new QuadTree();
@@ -78,40 +78,15 @@ public class Main_polyline {
 		return;
 
 	}
-	static void showStartUI() {
+	static void showStartUI() { //파일 입력 UI
 		Scanner scan = new Scanner(System.in);
-		Scanner scan2 = new Scanner(System.in);
-		int n;
+	
 		System.out.println("-----------도로망 댕글링 검출-------------");
-		System.out.println("파일 : 1.선택   2.직접입력");
-		n=scan.nextInt();
-		if(n==1) {
-			System.out.println("1.청주 도로망(485)"+"\n"+"2.상수관로(565)"+"\n"+"3.하수관로(454)");
-			n=scan.nextInt();
-			if(n==1) {
-				txt_file = "C:\\Users\\ETRI\\Documents\\test.shp";
-			}
-			else if(n==2) {
-				txt_file = "C:\\Users\\ETRI\\Desktop\\상수관로(WTL_PIPE_LM)\\WTL_PIPE_LM_Down3.shp";
-			}
-			else if(n==3) {
-				txt_file = "C:\\Users\\ETRI\\Desktop\\하수관로(SWL_PIPE_LM)\\SWL_PIPE_LM_Down3.shp";
-			}else {
-				System.out.println("입력오류");
-				showStartUI();
-			}
-			
-		}else if(n==2){
-			System.out.println("직접입력 : ");			 
-			txt_file = scan2.nextLine();			
-		}else {
-			System.out.println("입력오류");
-			showStartUI();
-		}
-		
-		
+
+			System.out.println("파일 입력 : ");			 
+			txt_file = scan.nextLine();			
 	}
-	static int SelectUI() {
+	static int SelectUI() { //탐색 기법 및 오차 범위 입력 UI
 		Scanner scan = new Scanner(System.in);
 		int n;
 		System.out.println("<댕글링 찾기>"+"\n"+"1.전체 탐색 "+"\n"+"2.Bound Box Sorting"+"\n"+"3.Quad Tree");
@@ -127,7 +102,7 @@ public class Main_polyline {
 		}
 		
 	}
-	static int QuitUI() {
+	static int QuitUI() { //종료 및 처음으로 UI
 		Scanner scan = new Scanner(System.in);
 		System.out.println("1.종료    2.처음으로");
 		int n=scan.nextInt();
@@ -143,7 +118,8 @@ public class Main_polyline {
 	
 		
 	}
-	static void ReadFile(String txt_file) throws Exception{
+	
+	static void ReadFile(String txt_file) throws Exception{ //파일 읽기, 객체 추출 및 리스트 생성
 		FileInputStream is = new FileInputStream(txt_file);
 
 		ValidationPreferences prefs = new ValidationPreferences();
@@ -153,18 +129,14 @@ public class Main_polyline {
 		ShapeFileHeader h = r.getHeader();
 		
 		shapeType = h.getShapeType().toString();
-
 		//System.out.println("The shape type of this files is " + h.getShapeType());
 
 		AbstractShape s;
-		// s = r.next();
 
-		//int numOfShape = 0;
 		int TotalPart = 0;
 		int TotalPoint = 0;
-		int a = 1;
 
-		while ((s = r.next()) != null) {
+		while ((s = r.next()) != null) {  //전체 데이터 갯수 세기
 
 			s.getShapeType();
 
@@ -182,7 +154,6 @@ public class Main_polyline {
 		ShapeFileReader R = new ShapeFileReader(IS, PREFS);
 		ShapeFileHeader H = R.getHeader();
 		AbstractShape S;
-		// S = R.next();
 
 		Point[] point = new Point[TotalPoint];
 		Node[] node = new Node[TotalPoint];
@@ -198,6 +169,10 @@ public class Main_polyline {
 		int PointID = 0;
 		int NodeID = 0;
 
+		
+		/*
+		 * Polyline, part, point, node 추출 및 생성  & 리스트에 저장하기
+		 */
 		while ((S = R.next()) != null) {
 
 			PolylineShape PL = (PolylineShape) S;
