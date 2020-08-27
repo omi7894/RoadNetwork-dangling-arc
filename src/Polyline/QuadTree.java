@@ -18,7 +18,7 @@ public class QuadTree {
 		return root;
 	}
 
-	public boolean Include(Node node, TreeNode treenode) {
+	public boolean Include(Node node, TreeNode treenode) { //Node가 TreeNode의 BBOX에 포함되는지를 확인하는 함수
 		if (treenode.getBox().getMinX() <= node.getX() && treenode.getBox().getMaxX() >= node.getX()
 				&& treenode.getBox().getMinY() <= node.getY() && treenode.getBox().getMaxY() >= node.getY()) {
 			return true;
@@ -27,8 +27,7 @@ public class QuadTree {
 		}
 	}
 
-	public void MakeQuadTree(ShapeList shapelist, double dt) {
-		// QuadTree만들기...
+	public void MakeQuadTree(ShapeList shapelist, double dt) {// QuadTree만들기
 
 		// TreeNode끼리 연결
 		TreeNode[] treenode = new TreeNode[21];
@@ -110,9 +109,13 @@ public class QuadTree {
 		}
 
 		TreeNode currentTN = new TreeNode();
-
-		//////////////////////////////////////// quadtree 다시
 		
+		
+		//-------------------------------------------------------------------------------
+		
+		/* 
+		 * root 노드부터 시작해서 객체를 TreeNode에 집어넣기
+		 */
 		currentTN = treenode[0];
 		for (int i = 0; i < shapelist.size(); i++) {
 			shapelist.getShape(i).setSntree(treenode[0]);
@@ -168,8 +171,10 @@ public class QuadTree {
 			}
 		}
   	
-		/////////////////////////////////
+		//---------------------------------------------------------------------------------
 		/*
+		 * 단말노드부터 시작해서 객체를 TreeNode에 집어넣기
+		 * 
 		for (int i = 0; i < shapelist.size(); i++) {
 			currentTN = treenode[0];
 
@@ -234,17 +239,17 @@ public class QuadTree {
 			}
 		}
 	*/
-///////////////////////////
+	//-------------------------------------------------------------------------------
 
 	}
 
-	public double getDistance(double x, double y, double x1, double y1) {
+	public double getDistance(double x, double y, double x1, double y1) {//두 좌표사이의 거리 
 
 		return Math.sqrt(Math.pow(Math.abs(x1 - x), 2) + Math.pow(Math.abs(y1 - y), 2));
 
 	}
-	public  void AddDegreeItself(TreeNode cur, double dt) {
-	
+	public  void AddDegreeItself(TreeNode cur, double dt) { //같은 TreeNode에 속한 객체끼리 비교 후, AddDegree
+															//dt:오차
 		Node SN1 = new Node();
 		Node EN1 = new Node();
 		Node SN2 = new Node();
@@ -258,8 +263,6 @@ public class QuadTree {
 					EN1 = cur.getShape()[i].getEnd();
 					SN2 = cur.getShape()[j].getStart();
 					EN2 = cur.getShape()[j].getEnd();
-
-					//double dt = 0;
 
 					double cal1 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
 					double cal2 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
@@ -290,7 +293,7 @@ public class QuadTree {
 		
 	}
 
-	public void AddDegreewithchild(TreeNode cur1, TreeNode cur2, double dt) {
+	public void AddDegreewithchild(TreeNode cur1, TreeNode cur2, double dt) { //자손또는 후손에있는 객체들과 비교 후, AddDegree
 
 		Node SN1 = new Node();
 		Node EN1 = new Node();
@@ -335,7 +338,7 @@ public class QuadTree {
 
 	}
 
-	public void search(TreeNode cur,double dt) {
+	public void search(TreeNode cur,double dt) { //재귀적으로 후손 찾기
 		if(cur==null) {return;}
 		else {
 			AddDegreeItself(cur,dt);
@@ -347,7 +350,7 @@ public class QuadTree {
 		}
 	}
 
-	public void AddDegree(double dt) {
+	public void AddDegree(double dt) {// AddDegreeItself, AddDegreeWithChild 하기
 		TreeNode currentTN = new TreeNode();
 		currentTN = this.root;
 		
@@ -360,10 +363,6 @@ public class QuadTree {
 				AddDegreewithchild(currentTN, currentTN.getChild()[i].getChild()[j],dt);
 			}
 		}
-		
-		
-		
-		
 		
 	}
 

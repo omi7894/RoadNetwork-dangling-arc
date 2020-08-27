@@ -23,20 +23,18 @@ public class Main_polyline {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
-		//"C:\\Users\\ETRI\\Desktop\\소규모 도로 데이터2\\cheongju3.shp" - 24개
-		//"C:\\Users\\ETRI\\Documents\\test.shp"  - 485개
+		//"C:\\Users\\ETRI\\Desktop\\소규모 도로 데이터2\\cheongju3.shp" - 청주데이터일부(24개)
+		//"C:\\Users\\ETRI\\Documents\\test.shp"  - 정주데이터일부(485개)
 		//"C:\\Users\\ETRI\\Desktop\\상수관로(WTL_PIPE_LM)\\WTL_PIPE_LM_Down3.shp" - 상수관(565)
 		//"C:\\Users\\ETRI\\Desktop\\하수관로(SWL_PIPE_LM)\\SWL_PIPE_LM_Down3.shp" - 하수관(454)
-		//shapelist.AddDegree();
-		//shapelist.AddDegreeBySorting();
-		//shapelist.MakeLinkedList();
-		//QuadTree quadtree = new QuadTree();
-		//quadtree.MakeQuadTree(shapelist);
-		//quadtree.AddDegree();
-		//shapelist.MakeLinkedList();
-		// long start = System.currentTimeMillis();
-		// long end = System.currentTimeMillis();
-		// System.out.println("시간 : "+(end-start)/1000.0);
+		//shapelist.AddDegree(); -----------전체탐색
+		//shapelist.AddDegreeBySorting();---------바운드박스 정렬
+		//QuadTree quadtree = new QuadTree();--------쿼드트리생성
+		//quadtree.MakeQuadTree(shapelist);---------shapelist에 있는 객체들로 QuadTree만들기
+		//quadtree.AddDegree();----------쿼드트리로 탐색
+		// long start = System.currentTimeMillis();-----시작시간
+		// long end = System.currentTimeMillis();-------종료시간
+		// System.out.println("시간 : "+(end-start)/1000.0);-------탐색시간
 		
 	
 		int a=1;//종료여부확인
@@ -52,21 +50,22 @@ public class Main_polyline {
 			System.out.println("데이터 갯수 : "+numOfShape+"\n");
 			int n=SelectUI();
 			
-			if(n==1) {
+			if(n==1) { //전체탐색
 				shapelist.AddDegree(delta);
-			}else if(n==2) {
+			}
+			else if(n==2) { //B-box 정렬 탐색
 				shapelist.AddDegreeBySorting(delta);
 			}
-			else{
+			else{ //QuadTree 탐색
 				QuadTree quadtree = new QuadTree();
 				quadtree.MakeQuadTree(shapelist,delta);
 				quadtree.AddDegree(delta);
 			}
 
 				
-			int cnt = 0;
+			int cnt = 0;//댕글링 갯수
 			for(int i=0;i<shapelist.size();i++) {
-				if(shapelist.getShape(i).getDsn()==1 && shapelist.getShape(i).getDen()==1) {
+				if(shapelist.getShape(i).getDsn()==1 && shapelist.getShape(i).getDen()==1) { //start node와 end node의 degree가 둘다 1이라면 댕글링 
 					cnt++;
 				}
 			}
@@ -177,6 +176,8 @@ public class Main_polyline {
 
 			PolylineShape PL = (PolylineShape) S;
 
+			
+			 // Bound Box 변수
 			double minX = PL.getPoints()[0].getX();
 			double minY = PL.getPoints()[0].getY();
 			double maxX = PL.getPoints()[0].getX();
@@ -245,7 +246,7 @@ public class Main_polyline {
 			BBox box = new BBox(minX, minY, maxX, maxY);
 			shape[ShapeID].setBox(box);
 
-			shapelist.addSorting(shape[ShapeID]);
+			shapelist.addSorting(shape[ShapeID]); //shapelist에 shape삽입하기(B-box정렬로)
 			ShapeID++;
 
 		}

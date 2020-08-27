@@ -20,7 +20,7 @@ public class ShapeList {
 		numOfDist = 0;
 	}
 
-	public void addLast(Shape shape) {
+	public void addLast(Shape shape) { //리스트에 추가할때, 맨뒤에 삽입하기
 		Shape newShape = new Shape();
 		newShape = shape;
 
@@ -38,7 +38,7 @@ public class ShapeList {
 		}
 	}
 
-	public void addSorting(Shape shape) {
+	public void addSorting(Shape shape) { //리스트에 추가할때, 정렬하며 삽입하기
 		Shape cur = new Shape();
 		Shape temp = new Shape();
 		cur = head;
@@ -82,13 +82,13 @@ public class ShapeList {
 		return temp;
 	}
 
-	public double getDistance(double x, double y, double x1, double y1) {
+	public double getDistance(double x, double y, double x1, double y1) { //두 좌표의 거리
 
 		return Math.sqrt(Math.pow(Math.abs(x1 - x), 2) + Math.pow(Math.abs(y1 - y), 2));
 
 	}
 
-	public void AddDegree(double dt) {
+	public void AddDegree(double dt) { //평범한 전체 탐색으로 degree늘리기
 
 		Node SN1 = new Node();
 		Node EN1 = new Node();
@@ -130,7 +130,7 @@ public class ShapeList {
 		}
 	}
 
-	public void AddDegreeBySorting(double dt) { // degree늘리기
+	public void AddDegreeBySorting(double dt) { // 바운드박스정렬로 degree늘리기
 
 		Node SN1 = new Node();
 		Node EN1 = new Node();
@@ -184,7 +184,7 @@ public class ShapeList {
 
 	}
 
-	public BBox getLargestBox() {
+	public BBox getLargestBox() { //지도 전체의 바운드 박스 구하기
 		BBox Lbox = new BBox();
 
 		double minX = this.getShape(0).getBox().getMinX();
@@ -403,54 +403,6 @@ public class ShapeList {
 		}
 
 	}
-
-	
-	public void FindReverse() { //Start-Start , End-End 만나는 것 갯수 세기
-		
-		int num=1;
-		
-		Node SN1 = new Node();
-		Node EN1 = new Node();
-		Node SN2 = new Node();
-		Node EN2 = new Node();
-		
-		for (int i = 0; i < this.size() - 1; i++) {
-			for (int j = i + 1; j < this.size(); j++) {
-				SN1 = this.getShape(i).getStart();
-				EN1 = this.getShape(i).getEnd();
-				SN2 = this.getShape(j).getStart();
-				EN2 = this.getShape(j).getEnd();
-
-				double dt=0;
-
-				double cal1 = getDistance(SN1.getX(), SN1.getY(), EN2.getX(), EN2.getY());
-				double cal2 = getDistance(SN1.getX(), SN1.getY(), SN2.getX(), SN2.getY());
-				double cal3 = getDistance(EN1.getX(), EN1.getY(), EN2.getX(), EN2.getY());
-				double cal4 = getDistance(EN1.getX(), EN1.getY(), SN2.getX(), SN2.getY());
-
-				if(cal2 <= dt ) {
-					int a1 = this.getShape(i).getId();
-					int a2 = this.getShape(j).getId();
-					System.out.println(num+"번째 댕글링 : "+a1+" , "+a2+"(Start Node)");
-					num++;
-				}
-				if(cal4 <= dt ) {
-					int a1 = this.getShape(i).getId();
-					int a2 = this.getShape(j).getId();
-					System.out.println(num+"번째 댕글링 : "+a1+" , "+a2+" (End Node)");
-					num++;
-				}
-				
-			}
-		}
-		
-		
-	}
-	
-	
-	
-	
-	
 	
 	
 }
