@@ -142,7 +142,8 @@ BBox
 
 ### 2) Bounding Box 정렬
 1. Polyline리스트를 Bounding Box 기준으로 정렬한다.
-2. Bounding Box가 겹치는 Polyline끼리 비교한다.
+2. Bounding Box가 겹치는 Polyline끼리 비교한다.   
+
 (탐색시간 N^2/2)
 
 
@@ -152,7 +153,11 @@ BBox
 3. 쿼드트리를 사용하여 Bounding Box가 겹치는 Polyline끼리 비교한다. 
 
 <img width="400" alt="댕글링_박스" src="https://user-images.githubusercontent.com/60821744/93175674-f8252780-f76a-11ea-9de0-79e409a1f687.PNG">
-<img width="400" alt="댕글링_쿼드트리" src="https://user-images.githubusercontent.com/60821744/93175676-f9565480-f76a-11ea-986b-8525e3cf95b7.PNG">
+<img width="400" alt="댕글링_쿼드트리" src="https://user-images.githubusercontent.com/60821744/93175676-f9565480-f76a-11ea-986b-8525e3cf95b7.PNG">   
+
+(탐색시간 NlogN)
+
+
 
 
 
