@@ -10,10 +10,7 @@
 <br>
 
 
-프로젝트 설명
-------------
-
-### ●댕글링 링크란?
+# 댕글링 링크란?
 
 <div>
 <img width="300" alt="캡처1" src="https://user-images.githubusercontent.com/60821744/92328772-0786df80-f09e-11ea-8542-70aa51b88216.PNG">
@@ -24,7 +21,7 @@
 
 <br><br><br>
 
-### ●ESRI ShapeFile
+# ESRI ShapeFile
 본 프로젝트에서 사용되는 데이터는 ShapeFile형식이다. **ShapeFile이란, ESRI사의 GIS프로그램에 사용되는 지리현상에 대한 기하학적 위치와 속성 정보를 저장, 제공해주는 데이터 포맷이다.**
 크게 Main file, Index file, dBase table로 구성이 되어있으며,
 <br>
@@ -50,13 +47,13 @@ PolyLine
 Bounding Box 설명 : https://en.wikipedia.org/wiki/Minimum_bounding_box <br>
 바운딩 박스는 향후 객체 탐색에 용이하게 쓰인다.
 
-<img width="320" alt="댕글링_바운딩" src="https://user-images.githubusercontent.com/60821744/93160563-88ec0b00-f74b-11ea-8af7-d8fe57d80672.PNG">
+<img width="500" alt="댕글링_바운딩" src="https://user-images.githubusercontent.com/60821744/93160563-88ec0b00-f74b-11ea-8af7-d8fe57d80672.PNG">
 
 <br><br><br>
 
-### ●클래스 구조
+# 클래스 구조
 
-<img width="298" alt="댕글링poly" src="https://user-images.githubusercontent.com/60821744/93160560-8689b100-f74b-11ea-8445-e446237993e0.PNG">
+<img width="400" alt="댕글링poly" src="https://user-images.githubusercontent.com/60821744/93160560-8689b100-f74b-11ea-8445-e446237993e0.PNG">
 
 ```java
 PolyLine
@@ -112,7 +109,7 @@ PointList
 {
   Point head
   Point tail
-  Point size
+  int size
 }
 
 BBox
@@ -126,20 +123,36 @@ BBox
 
 <br><br><br>
 
-### ●댕글링 객체 추출 방법
+# 댕글링 객체 추출 방법
 
-<img width="800" alt="댕글링_degree" src="https://user-images.githubusercontent.com/60821744/93171894-dde84b00-f764-11ea-886b-372a4572d82c.PNG">
+<img width="700" alt="댕글링_degree" src="https://user-images.githubusercontent.com/60821744/93171894-dde84b00-f764-11ea-886b-372a4572d82c.PNG">
 
 1. Node 클래스에 'degree'라는 정수형 변수를 추가한다. degree는 Node에 연결된 링크의 갯수이며 초기값은 1이다.  
-2. 모든 Polyline의 Node좌표 값을 비교하여 좌표가 일치하면 연결되었다고 판단한다. 따라서 degree를 높여준다.   
-3. 2번의 과정이 끝나고 StartNode와 EndNode의 degree가 모두 1인 Polyline를 댕글링 객체로 판단한다.
+2. 두 Polyline의 Node좌표 값을 비교하여 좌표가 일치하면 연결되었다고 판단한다. 따라서 degree를 높여준다.   
+3. 모든 Polyline에 대하여 2번을 진행한다. StartNode와 EndNode의 degree가 여전히 1인 Polyline를 댕글링 객체로 판단한다.   
+
+<br>
+
+## 탐색방법
+
+### 1) 전체탐색
+모든 Polyline을 서로 비교한다.    
+(탐색시간 N^2)
 
 
+### 2) Bounding Box 정렬
+1. Polyline리스트를 Bounding Box 기준으로 정렬한다.
+2. Bounding Box가 겹치는 Polyline끼리 비교한다.
+(탐색시간 N^2/2)
 
 
+### 3) Quad Tree 구현 
+1. 지도 전체의 Bounding Box를 재귀적으로 4등분한다.   
+2. 쿼드트리를 생성한다. 지도 전체의 Bounding Box를 루트노드로 설정하고 재귀적으로 4등분한 Bounding Box를 자식노드로 설정한다.   
+3. 쿼드트리를 사용하여 Bounding Box가 겹치는 Polyline끼리 비교한다. 
 
-
-
+<img width="400" alt="댕글링_박스" src="https://user-images.githubusercontent.com/60821744/93175674-f8252780-f76a-11ea-9de0-79e409a1f687.PNG">
+<img width="400" alt="댕글링_쿼드트리" src="https://user-images.githubusercontent.com/60821744/93175676-f9565480-f76a-11ea-986b-8525e3cf95b7.PNG">
 
 
 
