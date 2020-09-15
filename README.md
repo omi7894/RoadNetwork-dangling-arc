@@ -50,10 +50,96 @@ PolyLine
 Bounding Box 설명 : https://en.wikipedia.org/wiki/Minimum_bounding_box <br>
 바운딩 박스는 향후 객체 탐색에 용이하게 쓰인다.
 
-<img width="298" alt="댕글링poly" src="https://user-images.githubusercontent.com/60821744/93160560-8689b100-f74b-11ea-8445-e446237993e0.PNG">
 <img width="320" alt="댕글링_바운딩" src="https://user-images.githubusercontent.com/60821744/93160563-88ec0b00-f74b-11ea-8af7-d8fe57d80672.PNG">
-
 
 <br><br><br>
 
 ### ●클래스 구조
+
+<img width="298" alt="댕글링poly" src="https://user-images.githubusercontent.com/60821744/93160560-8689b100-f74b-11ea-8445-e446237993e0.PNG">
+
+```java
+PolyLine
+{
+  int id //식별번호
+  Node startnode //시작노드
+  Node endnode //끝노드
+  BBox box //바운딩박스
+  PartList partlist //포함하고있는 Part리스트
+  Polyline next //리스트상에서 다음 Polyline
+}
+
+Part
+{
+  int id //식별번호
+  Node startnode //시작노드
+  Node endnode //끝노드
+  PointList pointlist //포함하고있는 Point리스트
+  Part next //리스트상에서 다음 Part
+}
+
+Point
+{
+  double x //x좌표
+  doulbe y //y좌표
+  Point next //리스트상에서 다음 Point
+}
+
+Node
+{
+  int id //식별번호
+  double x //x좌표
+  double y //y좌표
+  int partID //속해있는 Part의 식별번호
+  int PolylineID //속해있는 Polyline의 식별번호
+}
+
+PolylineList
+{
+  Polyline head
+  Polyline tail
+  int size
+}
+
+PartList
+{
+  Part head
+  Part tail
+  int size
+}
+
+PointList
+{
+  Point head
+  Point tail
+  Point size
+}
+
+BBox
+{
+  double minX
+  double minY
+  double maxX
+  double maxY
+}
+```
+
+<br><br><br>
+
+### ●댕글링 객체 추출 방법
+
+<img width="800" alt="댕글링_degree" src="https://user-images.githubusercontent.com/60821744/93171894-dde84b00-f764-11ea-886b-372a4572d82c.PNG">
+
+1. Node 클래스에 'degree'라는 정수형 변수를 추가한다. degree는 Node에 연결된 링크의 갯수이며 초기값은 1이다.  
+2. 모든 Polyline의 Node좌표 값을 비교하여 좌표가 일치하면 연결되었다고 판단한다. 따라서 degree를 높여준다.   
+3. 2번의 과정이 끝나고 StartNode와 EndNode의 degree가 모두 1인 Polyline를 댕글링 객체로 판단한다.
+
+
+
+
+
+
+
+
+
+
