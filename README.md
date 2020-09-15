@@ -50,6 +50,10 @@ PolyLine
 Bounding Box 설명 : https://en.wikipedia.org/wiki/Minimum_bounding_box <br>
 바운딩 박스는 향후 객체 탐색에 용이하게 쓰인다.
 
+<img width="298" alt="댕글링poly" src="https://user-images.githubusercontent.com/60821744/93160560-8689b100-f74b-11ea-8445-e446237993e0.PNG">
+<img width="320" alt="댕글링_바운딩" src="https://user-images.githubusercontent.com/60821744/93160563-88ec0b00-f74b-11ea-8af7-d8fe57d80672.PNG">
+
+
 <br><br><br>
 
 ### ●클래스 구조
