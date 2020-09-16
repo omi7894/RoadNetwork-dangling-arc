@@ -78,7 +78,7 @@ Part
 Point
 {
   double x //x좌표
-  doulbe y //y좌표
+  double y //y좌표
   Point next //리스트상에서 다음 Point
 }
 
